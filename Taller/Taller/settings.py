@@ -54,7 +54,7 @@ ROOT_URLCONF = 'Taller.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/mnt/d/021 Proyectos Programacion/django/Taller/Taller/Templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
