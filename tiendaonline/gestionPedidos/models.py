@@ -15,5 +15,5 @@ class Articles(models.Model):
 class Orders(models.Model):
   number=models.IntegerField()
   date=models.DateField()
-  entregado=models.BooleanField()
+  delivered=models.BooleanField()
 
