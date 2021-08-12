@@ -1,0 +1,17 @@
+.vscode/
+.DS_Store
+__pycache__/
+.json
+*.db.sqlite3
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
+*png
+*jpg
