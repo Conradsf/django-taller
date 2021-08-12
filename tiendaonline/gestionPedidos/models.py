@@ -17,3 +17,6 @@ class Orders(models.Model):
   date=models.DateField()
   delivered=models.BooleanField()
 
+class EstoEsUnaPrueba(models.Model):
+  hola=models.BooleanField()
+
