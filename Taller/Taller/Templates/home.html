@@ -1,0 +1,15 @@
+{% extends "__base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+  <P>Esto enviando mi nombre desde la view {{marca.upper}}, {{color|lower}}, {{matricula}}</P>
+  <h1>Formulario</h1>
+    {% if temas %}
+      {% for eltema in temas %}
+        <ul>
+          <li>{{eltema}}</li>
+        </ul>
+      {% endfor %}
+    {% else %}
+      <p>No hay elementos que mostrar</p>
+    {% endif %}
+{% endblock %}

@@ -1,13 +1,18 @@
-from django.http import HttpResponse
-# No hace falta importar Tamplate, Context si trabajamos con el import de loader
+# from django.http import HttpResponse
+# 1 No hace falta importar Tamplate, Context si trabajamos con el import de loader
 # 
 # from django.template import  Template, Context
 #
-# para optimizar el import de loader se puede optimizar más importando solo el loader
+# 2 para optimizar el import de loader se puede optimizar más importando solo el loader
 # 
 # from django.template import loader
+#
+# 3 aun se podría simplificar por 3a vez usando el metodo render (shortcuts)
+#
+# from django.template.loader import get_template
 
-from django.template.loader import get_template
+from django.shortcuts import render
+
 
 
 class Car(object):
@@ -16,7 +21,7 @@ class Car(object):
     self.color=color
     self.registration=registration
 
-def Formulario(request):
+def Home(request):
 
   # Forma poco convencional de cargar un template sin usar settings.py:
   # ANTES
@@ -39,13 +44,21 @@ def Formulario(request):
   # AHORA solo pasamos el dict.
   # documento=plt.render(ctx)
 
-  doc_externo=get_template('miplantilla.html')
+  # con el metodo render() impotrado con .shorcuts nos podemos cargar el doc_externo y  usar solo 1 funcion:
+  #doc_externo=get_template('miplantilla.html')
+  
+  
+  # args = {"marca": car1.brand, "color": car1.color, "matricula": car1.registration, "temas":taller_temas} 
+  # Usando el metodo .render() retornamos directamente el render pasando request como parámetro
+  #
+  # documento=doc_externo.render(args)
+  # return HttpResponse(documento)
   car1 = Car("Seat","Blue","4321ABC")
   taller_temas = ["Plantillas","Modelos","Formulario"]
   args = {"marca": car1.brand, "color": car1.color, "matricula": car1.registration, "temas":taller_temas}
-  documento=doc_externo.render(args)
-  return HttpResponse(documento)
+  return render(request, "home.html", args)
 
-def Resultado(request):
-  return HttpResponse("Página resultado de consulta")
+# def Resultado(request):
+  
+#   return HttpResponse("Página resultado de consulta")
 
