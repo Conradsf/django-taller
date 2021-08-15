@@ -15,4 +15,4 @@ lib
 lib64
 *png
 *jpg
-settings.py
+tiendaonline/tiendaonline/settings.py

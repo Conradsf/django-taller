@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from gestionPedidos.models import Articles
+from django.core.mail import send_mail
+from django.conf import settings
+from gestionPedidos.forms import contact_form
+
 # Create your views here.
 
 def search_products(request):
@@ -35,13 +39,34 @@ def contact(request):
 
   if request.method=="POST":
 
+    form=contact_form(request.POST)
+
+    if form.is_valid():
+
+      valid_form=form.cleaned_data
+
+      send_mail(valid_form['subject'], valid_form['message'],
+      valid_form.get('email',''),['conradsf@gmail.com'],)
+
+      return render(request, "thanks.html")
+
+  else:
+
+    form=contact_form()
+
+  return render(request, "contact2.html", {"form":contact_form})
+
+  """
+  Forma rudimentaria de hacer un formulario:
+
     subject=request.POST["subject"]
     message=request.POST["message"] + " " + request.POST["email"]
     email_from=settings.EMAIL_HOST_USER
-    recipent_list=["conradsf@gmail.com"]
+    recipient_list=["conradsf@gmail.com"]
     
-    send_email(subject, message, email_from, recipent_list)
+    send_mail(subject, message, email_from, recipient_list)
     
     return render(request, "thanks.html")
 
   return render(request, "contact.html")
+  """

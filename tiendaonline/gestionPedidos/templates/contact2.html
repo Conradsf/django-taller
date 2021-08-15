@@ -8,10 +8,15 @@
 </head>
 <body>
   <h1>Contáctanos</h1>
+
+  {% if form.errors %}
+    <span>Revisa este campo.</span>
+  {% endif %}
+
   <form action="/contact/" method="POST">{% csrf_token %}
-    <p>Asunto: <input type="text" name="subject"></p>
-    <p>Email: <input type="text" name="email"></p>
-    <p>Asunto: <textarea name="message" rows="15" cols="45"></textarea></p>
+   
+    {{ form }}
+
     <input type="submit" value="Send">
   </form>
 
