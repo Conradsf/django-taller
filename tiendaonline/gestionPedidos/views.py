@@ -10,9 +10,9 @@ def search_products(request):
 def search_results(request):
 
   if request.GET["prd"]:
-    #Comprobación de que el formulario funciona:
-    #msg="Founded Articles: %r" %request.GET["prd"]
-    
+    # Comprobación de que el formulario funciona:
+    # msg="Founded Articles: %r" %request.GET["prd"]
+
     product=request.GET["prd"]
 
     if len(product)>20:
@@ -31,3 +31,17 @@ def search_results(request):
   
   return HttpResponse(msg)
 
+def contact(request):
+
+  if request.method=="POST":
+
+    subject=request.POST["subject"]
+    message=request.POST["message"] + " " + request.POST["email"]
+    email_from=settings.EMAIL_HOST_USER
+    recipent_list=["conradsf@gmail.com"]
+    
+    send_email(subject, message, email_from, recipent_list)
+    
+    return render(request, "thanks.html")
+
+  return render(request, "contact.html")
